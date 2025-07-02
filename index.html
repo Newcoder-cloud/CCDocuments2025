@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Documents</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4f46e5'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    input::file-selector-button {
+      background-color: #4f46e5;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    input::file-selector-button:hover {
+      background-color: #4338ca;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center text-white font-sans">
+
+  <div class="glass-card p-8 rounded-2xl w-full max-w-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">Upload Documents</h2>
+    <form id="uploadForm" class="space-y-4">
+      
+      <div>
+        <label class="flex items-center font-semibold mb-1">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A5 5 0 0012 22a5 5 0 006.879-4.196M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Full Name
+        </label>
+        <input type="text" name="fullname" class="w-full p-3 rounded-lg text-black" required>
+      </div>
+
+      <div>
+        <label class="flex items-center font-semibold mb-1">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h18M3 12h18M3 19h18" />
+          </svg>
+          Mobile Number
+        </label>
+        <input type="text" name="mobile" class="w-full p-3 rounded-lg text-black" required>
+      </div>
+
+      <div>
+        <label class="flex items-center font-semibold mb-1">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405M12 17h3m0 0V3m0 14l1.405-1.405M6 3h.01" />
+          </svg>
+          Aadhaar Card (Front + Back)
+        </label>
+        <input type="file" name="aadhaar" accept="image/*" multiple class="w-full text-sm" required>
+        <p class="text-sm text-gray-200 mt-1">Select both front and back in one go.</p>
+      </div>
+
+      <div>
+        <label class="flex items-center font-semibold mb-1">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h10M5 6h14M5 18h14" />
+          </svg>
+          PAN Card
+        </label>
+        <input type="file" name="pan_card" accept="image/*" class="w-full text-sm" required>
+      </div>
+
+      <div>
+        <label class="flex items-center font-semibold mb-1">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h2.586A2 2 0 018 3.414l1.293 1.293a1 1 0 00.707.293H21a1 1 0 011 1v11a1 1 0 01-1 1h-2l1.293 1.293a1 1 0 01-1.414 1.414L17 18h-2l1.293 1.293a1 1 0 01-1.414 1.414L13 18h-2l1.293 1.293a1 1 0 01-1.414 1.414L9 18H5a1 1 0 01-1-1V4z" />
+          </svg>
+          Selfie Photo
+        </label>
+        <input type="file" name="selfie" accept="image/*" capture="user" class="w-full text-sm" required>
+        <p class="text-sm text-gray-200 mt-1">Opens camera on mobile.</p>
+      </div>
+
+      <button type="submit" class="w-full py-3 mt-4 bg-white text-indigo-700 font-bold rounded-lg hover:bg-indigo-100 transition">
+        Upload Documents
+      </button>
+
+      <p id="status" class="text-center text-sm mt-4 text-green-300 font-semibold"></p>
+    </form>
+  </div>
+
+  <script>
+    const DROPBOX_TOKEN = 'sl.u.AF2ln8PPUZaUTUo5eRL6L18ty6y2TH1gcdt2OD_r8TtYIh81chlL5kWm9l9Cos66XU9Hvmsaj_43rjPqEQMwri5PWzr9KeusUQV5u1bLhkT9jHOMbeL6DY6p2fB0W5LRWqHexR5-iKTfeUK1smeKMljMvJ7e7ifqeB9yqp1GhcwtiaATJo0L--doDDYflR3KXEkSdZq_JDpravNV_kt6HeYqArLuNxP_DA3n3uYryFoLSkyft9Ou3XE39sIk4yrd8bKPh-06fBu3k9DqxCrS69cX8vYQkVvxLjdhY2hNfqqy9MEj0G8AsnJn-eRftDcayZc-_3jVngtmvb1glIp8vQYNNmxpAaIlkB7ZeydjqzTcCvR7bpb0WL6YJnpp_K16O745RVcF5S0qD85rkZXpy1RGx_4l4ojlO9cXIeyE8WIiNC-Dlfs7XgzRTk_5gVJoPf3azpOXx_6mjbZVWli6eIUkQVCnIgYSvQ5stk-_y_A8NmyCwQ5S9rBBweOMqj78jTI87VWp4inzqYvKJOF_dIF1g4dYU-uwYxbVGMzshY2X0Tcre85fp851DPhW1E1i72nOoPySUQYX2QDueHhPpcjEFhX_EixDw7T_8p8oomrMevIpqJNVPS7rKMoghhW02fqF_IIgJAQQTUBpnPC_AR2CAW7xAOEsM2_ii_enF9nEse-X7JQm7mRpuoQvrNZP5ovGohIgNtB9GBrxubWoVT-3Mcs5DNatnY42wGuG9V3346cJIo4SiORdAqQalBA18i9fNHTJ0IDOzEXMxvWGNGHRZiolg5sOAEnpUxkA0DbOFr68heTuOSXnFzFLRnK-QrHIelIS-9YprZ_ZXGFkfgQPOcer3aROEWvDTADR5TejOAsiwLZj9BToOQW1xFsC_apJohH1hVukZbLPK9rGSRPgB8rO7JMNlC15R85_kcGpAv5CXsqvlW1FiOltBKVL4EPf0TYuj8Isiwc1t3Tys4ynW1qtQJ-GmLghQTbdM0kgocGXVqtW1m-Ku6MZGnU_5s6jzjL-qe13fQw-M7jhCKHx21SCcYjzJb4JlW31hjPLApojq6AUCDVqNKkgNss_B3zMRzUfn3kfUJLjXkX72M4Mzvz1tVXnB7lHHskJ4rmtZzCZ4lWclQYKLhc7L3WbXhc4Q4FH3hzJLaOW9qvxD1z9C5OOJFYX9Zo-wR3_hYU9t_9AWDr1nWTvT5BSWilgf-GAVe7ge4nRNk44QB9qFASrUxZBvakmrqbVOrOgYUkCdlT8-3i6_PGnEnKOFdWM1xY44SEBAbl5W7EnsDh3qtuC'; // 🔐 Replace this
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const fullname = form.fullname.value.trim().replace(/\s+/g, '_');
+      const mobile = form.mobile.value.trim();
+      const folderName = `${mobile}_${fullname}`;
+      const statusEl = document.getElementById('status');
+      statusEl.innerText = "Uploading...";
+
+      try {
+        const aadhaarFiles = form.aadhaar.files;
+        for (let i = 0; i < aadhaarFiles.length; i++) {
+          const file = aadhaarFiles[i];
+          const path = `/${folderName}/aadhaar_${i+1}_${file.name}`;
+          const content = await file.arrayBuffer();
+          await uploadToDropbox(path, content);
+        }
+
+        const pan = form.pan_card.files[0];
+        await uploadToDropbox(`/${folderName}/pan_card_${pan.name}`, await pan.arrayBuffer());
+
+        const selfie = form.selfie.files[0];
+        await uploadToDropbox(`/${folderName}/selfie_${selfie.name}`, await selfie.arrayBuffer());
+
+        statusEl.innerText = "✅ All files uploaded successfully!";
+      } catch (error) {
+        console.error(error);
+        statusEl.innerText = "❌ Upload failed. Try again.";
+      }
+    });
+
+    async function uploadToDropbox(path, content) {
+      return await fetch("https://content.dropboxapi.com/2/files/upload", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + DROPBOX_TOKEN,
+          "Dropbox-API-Arg": JSON.stringify({
+            path: path,
+            mode: "add",
+            autorename: true,
+            mute: false
+          }),
+          "Content-Type": "application/octet-stream"
+        },
+        body: content
+      });
+    }
+  </script>
+
+</body>
+</html>
