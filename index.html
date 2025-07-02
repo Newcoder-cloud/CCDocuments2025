@@ -5,29 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Upload Documents</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#4f46e5'
-          }
-        }
-      }
-    }
-  </script>
   <style>
     body {
       background: linear-gradient(to right, #667eea, #764ba2);
     }
-
     .glass-card {
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     }
-
     input::file-selector-button {
       background-color: #4f46e5;
       color: white;
@@ -36,7 +23,6 @@
       border: none;
       cursor: pointer;
     }
-
     input::file-selector-button:hover {
       background-color: #4338ca;
     }
@@ -76,7 +62,7 @@
           Aadhaar Card (Front + Back)
         </label>
         <input type="file" name="aadhaar" accept="image/*" multiple class="w-full text-sm" required>
-        <p class="text-sm text-gray-200 mt-1">Select both front and back in one go.</p>
+        <p class="text-sm text-gray-200 mt-1">Select both front and back together</p>
       </div>
 
       <div>
@@ -92,12 +78,12 @@
       <div>
         <label class="flex items-center font-semibold mb-1">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h2.586A2 2 0 018 3.414l1.293 1.293a1 1 0 00.707.293H21a1 1 0 011 1v11a1 1 0 01-1 1h-2l1.293 1.293a1 1 0 01-1.414 1.414L17 18h-2l1.293 1.293a1 1 0 01-1.414 1.414L13 18h-2l1.293 1.293a1 1 0 01-1.414 1.414L9 18H5a1 1 0 01-1-1V4z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618V15.5a1 1 0 01-.447.832L15 19m0 0v-9m0 9H5a1 1 0 01-1-1v-6a1 1 0 011-1h10" />
           </svg>
           Selfie Photo
         </label>
         <input type="file" name="selfie" accept="image/*" capture="user" class="w-full text-sm" required>
-        <p class="text-sm text-gray-200 mt-1">Opens camera on mobile.</p>
+        <p class="text-sm text-gray-200 mt-1">Opens camera on mobile</p>
       </div>
 
       <button type="submit" class="w-full py-3 mt-4 bg-white text-indigo-700 font-bold rounded-lg hover:bg-indigo-100 transition">
@@ -109,7 +95,7 @@
   </div>
 
   <script>
-    const DROPBOX_TOKEN = 'sl.u.AF2ln8PPUZaUTUo5eRL6L18ty6y2TH1gcdt2OD_r8TtYIh81chlL5kWm9l9Cos66XU9Hvmsaj_43rjPqEQMwri5PWzr9KeusUQV5u1bLhkT9jHOMbeL6DY6p2fB0W5LRWqHexR5-iKTfeUK1smeKMljMvJ7e7ifqeB9yqp1GhcwtiaATJo0L--doDDYflR3KXEkSdZq_JDpravNV_kt6HeYqArLuNxP_DA3n3uYryFoLSkyft9Ou3XE39sIk4yrd8bKPh-06fBu3k9DqxCrS69cX8vYQkVvxLjdhY2hNfqqy9MEj0G8AsnJn-eRftDcayZc-_3jVngtmvb1glIp8vQYNNmxpAaIlkB7ZeydjqzTcCvR7bpb0WL6YJnpp_K16O745RVcF5S0qD85rkZXpy1RGx_4l4ojlO9cXIeyE8WIiNC-Dlfs7XgzRTk_5gVJoPf3azpOXx_6mjbZVWli6eIUkQVCnIgYSvQ5stk-_y_A8NmyCwQ5S9rBBweOMqj78jTI87VWp4inzqYvKJOF_dIF1g4dYU-uwYxbVGMzshY2X0Tcre85fp851DPhW1E1i72nOoPySUQYX2QDueHhPpcjEFhX_EixDw7T_8p8oomrMevIpqJNVPS7rKMoghhW02fqF_IIgJAQQTUBpnPC_AR2CAW7xAOEsM2_ii_enF9nEse-X7JQm7mRpuoQvrNZP5ovGohIgNtB9GBrxubWoVT-3Mcs5DNatnY42wGuG9V3346cJIo4SiORdAqQalBA18i9fNHTJ0IDOzEXMxvWGNGHRZiolg5sOAEnpUxkA0DbOFr68heTuOSXnFzFLRnK-QrHIelIS-9YprZ_ZXGFkfgQPOcer3aROEWvDTADR5TejOAsiwLZj9BToOQW1xFsC_apJohH1hVukZbLPK9rGSRPgB8rO7JMNlC15R85_kcGpAv5CXsqvlW1FiOltBKVL4EPf0TYuj8Isiwc1t3Tys4ynW1qtQJ-GmLghQTbdM0kgocGXVqtW1m-Ku6MZGnU_5s6jzjL-qe13fQw-M7jhCKHx21SCcYjzJb4JlW31hjPLApojq6AUCDVqNKkgNss_B3zMRzUfn3kfUJLjXkX72M4Mzvz1tVXnB7lHHskJ4rmtZzCZ4lWclQYKLhc7L3WbXhc4Q4FH3hzJLaOW9qvxD1z9C5OOJFYX9Zo-wR3_hYU9t_9AWDr1nWTvT5BSWilgf-GAVe7ge4nRNk44QB9qFASrUxZBvakmrqbVOrOgYUkCdlT8-3i6_PGnEnKOFdWM1xY44SEBAbl5W7EnsDh3qtuC'; // 🔐 Replace this
+    const DROPBOX_TOKEN = 'sl.u.AF2ln8PPUZaUTUo5eRL6L18ty6y2TH1gcdt2OD_r8TtYIh81chlL5kWm9l9Cos66XU9Hvmsaj_43rjPqEQMwri5PWzr9KeusUQV5u1bLhkT9jHOMbeL6DY6p2fB0W5LRWqHexR5-iKTfeUK1smeKMljMvJ7e7ifqeB9yqp1GhcwtiaATJo0L--doDDYflR3KXEkSdZq_JDpravNV_kt6HeYqArLuNxP_DA3n3uYryFoLSkyft9Ou3XE39sIk4yrd8bKPh-06fBu3k9DqxCrS69cX8vYQkVvxLjdhY2hNfqqy9MEj0G8AsnJn-eRftDcayZc-_3jVngtmvb1glIp8vQYNNmxpAaIlkB7ZeydjqzTcCvR7bpb0WL6YJnpp_K16O745RVcF5S0qD85rkZXpy1RGx_4l4ojlO9cXIeyE8WIiNC-Dlfs7XgzRTk_5gVJoPf3azpOXx_6mjbZVWli6eIUkQVCnIgYSvQ5stk-_y_A8NmyCwQ5S9rBBweOMqj78jTI87VWp4inzqYvKJOF_dIF1g4dYU-uwYxbVGMzshY2X0Tcre85fp851DPhW1E1i72nOoPySUQYX2QDueHhPpcjEFhX_EixDw7T_8p8oomrMevIpqJNVPS7rKMoghhW02fqF_IIgJAQQTUBpnPC_AR2CAW7xAOEsM2_ii_enF9nEse-X7JQm7mRpuoQvrNZP5ovGohIgNtB9GBrxubWoVT-3Mcs5DNatnY42wGuG9V3346cJIo4SiORdAqQalBA18i9fNHTJ0IDOzEXMxvWGNGHRZiolg5sOAEnpUxkA0DbOFr68heTuOSXnFzFLRnK-QrHIelIS-9YprZ_ZXGFkfgQPOcer3aROEWvDTADR5TejOAsiwLZj9BToOQW1xFsC_apJohH1hVukZbLPK9rGSRPgB8rO7JMNlC15R85_kcGpAv5CXsqvlW1FiOltBKVL4EPf0TYuj8Isiwc1t3Tys4ynW1qtQJ-GmLghQTbdM0kgocGXVqtW1m-Ku6MZGnU_5s6jzjL-qe13fQw-M7jhCKHx21SCcYjzJb4JlW31hjPLApojq6AUCDVqNKkgNss_B3zMRzUfn3kfUJLjXkX72M4Mzvz1tVXnB7lHHskJ4rmtZzCZ4lWclQYKLhc7L3WbXhc4Q4FH3hzJLaOW9qvxD1z9C5OOJFYX9Zo-wR3_hYU9t_9AWDr1nWTvT5BSWilgf-GAVe7ge4nRNk44QB9qFASrUxZBvakmrqbVOrOgYUkCdlT8-3i6_PGnEnKOFdWM1xY44SEBAbl5W7EnsDh3qtuC'; // 👈 Replace with your Dropbox token
 
     document.getElementById('uploadForm').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -125,7 +111,7 @@
         const aadhaarFiles = form.aadhaar.files;
         for (let i = 0; i < aadhaarFiles.length; i++) {
           const file = aadhaarFiles[i];
-          const path = `/${folderName}/aadhaar_${i+1}_${file.name}`;
+          const path = `/${folderName}/aadhaar_${i + 1}_${file.name}`;
           const content = await file.arrayBuffer();
           await uploadToDropbox(path, content);
         }
